@@ -4,10 +4,15 @@ raise "Missing env var" if %w[TWITTER_CONSUMER_KEY TWITTER_CONSUMER_SECRET TWITT
 
 SLEEP = 86400 / 200
 
+puts "start"
+
 friend_ids = []
 
 loop do
-  friend_ids = Twitter.friend_ids.ids if friend_ids.empty?
+  if friend_ids.empty?
+    puts "get friend ids"
+    friend_ids = Twitter.friend_ids.ids
+  end
 
   id = friend_ids.pop
   puts "unfollow #{id}"
